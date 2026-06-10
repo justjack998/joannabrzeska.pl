@@ -2330,3 +2330,15 @@ body::after {
 }
 .treatments .treatment-card__body h3 { font-size: 23px; }
 .treatments .treatment-card:hover { box-shadow: 0 22px 56px rgba(122,46,59,.12); }
+
+/* ---- Hero composition refine v3 (desktop) ---- */
+@media (min-width: 1025px) {
+  .hero__visual--portrait { justify-content: flex-end; align-items: flex-end; height: clamp(500px, 53vw, 680px); }
+  .hero__backdrop { left: auto; right: -3%; transform: none; width: min(112%, 540px); height: 100%; }
+  .hero__portrait { height: 113%; max-width: none; }
+  .hero__visual--portrait .hero__badge { left: 4%; right: auto; bottom: 17%; }
+}
+
+/* ---- testimonial star rating + numeral consistency ---- */
+.testi__stars { display: block; color: var(--gold); letter-spacing: 3px; font-size: 14px; margin-bottom: 14px; position: relative; z-index: 1; }
+.step__num { color: var(--gold); }
