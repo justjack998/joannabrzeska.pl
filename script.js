@@ -80,3 +80,46 @@ document.querySelectorAll('.pricetabs').forEach((wrap) => {
   const close = () => { menu.classList.remove('is-open'); document.body.classList.remove('menu-open'); burgerBtn.setAttribute('aria-expanded', 'false'); };
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
 })();
+
+// ---- Pointer-reactive flourishes (desktop, motion-safe) ----
+(() => {
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!fine || reduce) return;
+
+  // soft cursor glow in heroes
+  document.querySelectorAll('.hero, .page-hero').forEach((sec) => {
+    let raf = 0, x = 0, y = 0;
+    sec.addEventListener('pointermove', (e) => {
+      const r = sec.getBoundingClientRect();
+      x = e.clientX - r.left; y = e.clientY - r.top;
+      if (!raf) raf = requestAnimationFrame(() => {
+        sec.style.setProperty('--cx', x + 'px');
+        sec.style.setProperty('--cy', y + 'px');
+        raf = 0;
+      });
+    });
+  });
+
+  // magnetic large CTAs
+  document.querySelectorAll('.btn--lg').forEach((btn) => {
+    btn.addEventListener('pointermove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+      const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+      btn.style.transform = `translate(${dx * 5}px, ${dy * 4}px)`;
+    });
+    btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+  });
+
+  // gateway door subtle tilt
+  document.querySelectorAll('.door').forEach((door) => {
+    door.addEventListener('pointermove', (e) => {
+      const r = door.getBoundingClientRect();
+      const rx = ((e.clientY - r.top) / r.height - 0.5) * -4;
+      const ry = ((e.clientX - r.left) / r.width - 0.5) * 4;
+      door.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+    door.addEventListener('pointerleave', () => { door.style.transform = ''; });
+  });
+})();
