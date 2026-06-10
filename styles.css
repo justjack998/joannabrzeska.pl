@@ -2256,3 +2256,77 @@ body::after {
   .nav__menu::before { display: none; }
   .nav__menu a { padding: 12px 0; font-size: 16px; border-bottom: 1px solid var(--line); }
 }
+
+/* ============================================================
+   AESTHETIC REFINEMENT v2 — warmer, calmer, more editorial
+   ============================================================ */
+:root {
+  --cream:       #FAF5EE;
+  --cream-2:     #F2E8DA;
+  --paper:       #FDFBF6;
+  --graphite:    #2A211C;
+  --graphite-2:  #574B42;
+  --muted:       #9A8B7D;
+  --line:        #EADFCF;
+  --nude:        #ECD8C7;
+  --nude-2:      #D9B8A0;
+  --blush:       #ECD2CB;
+  --burgundy:    #7A2E3B;
+  --burgundy-dk: #5C1F2A;
+  --gold:        #B0894F;
+
+  --shadow-sm: 0 1px 2px rgba(42,33,28,.04), 0 6px 18px rgba(42,33,28,.05);
+  --shadow:    0 16px 44px rgba(42,33,28,.10);
+  --shadow-lg: 0 34px 84px rgba(42,33,28,.16);
+}
+
+/* type polish */
+.eyebrow { letter-spacing: 0.26em; font-size: 11.5px; }
+.display { letter-spacing: -0.022em; }
+.lede { line-height: 1.62; }
+
+/* section head: refined centred hairline above the eyebrow */
+.section-head .eyebrow { position: relative; padding-top: 22px; }
+.section-head .eyebrow::after {
+  content: "";
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 34px; height: 1px; background: var(--gold); opacity: .8;
+}
+.theme-kursy .section-head .eyebrow::after { background: var(--gold); }
+
+/* unify cards: softer hairline + calmer hover lift */
+.treatment-card, .price-group, .module-card, .testi, .pillar, .course-card {
+  border-radius: 22px;
+}
+.treatment-card { border-color: var(--line); }
+
+/* buttons: a touch more refined */
+.btn { letter-spacing: 0.02em; }
+.btn--lg { padding: 18px 34px; }
+
+/* hero arch: blush gradient bridges the photo with the warm palette */
+.hero__backdrop {
+  background: radial-gradient(112% 86% at 50% 26%, var(--blush) 0%, rgba(236,210,203,.42) 46%, transparent 76%);
+}
+.hero__backdrop::after { border-color: rgba(176,137,79,.32); }
+.hero__visual--portrait .hero__badge {
+  top: auto; bottom: 13%; left: -2%; right: auto;
+}
+
+/* page-hero arch corner softening for consistency */
+.page-hero__img { border-radius: 240px 28px 240px 28px; }
+
+/* Oferta: photo-light editorial cards with index numerals */
+.treatments__grid { counter-reset: tcard; }
+.treatments .treatment-card { padding: 0; background: var(--paper); border: 1px solid var(--line); }
+.treatments .treatment-card__body { counter-increment: tcard; padding: 34px 32px; }
+.treatments .treatment-card__body::before {
+  content: counter(tcard, decimal-leading-zero);
+  display: block;
+  font-family: var(--ff-display); font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-size: 24px; line-height: 1; color: var(--gold);
+  margin-bottom: 18px;
+}
+.treatments .treatment-card__body h3 { font-size: 23px; }
+.treatments .treatment-card:hover { box-shadow: 0 22px 56px rgba(122,46,59,.12); }
